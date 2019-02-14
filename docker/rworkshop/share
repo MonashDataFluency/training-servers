@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+
+import argparse, os
+
+def run(cmd): assert 0 == os.system(cmd)
+
+parser = argparse.ArgumentParser(epilog="""
+This script symlinks a directory or file for all users.
+
+Remember to run this script with "sudo"!
+""", formatter_class=argparse.RawTextHelpFormatter)
+parser.add_argument("filename",help="File or directory to share.")
+args = parser.parse_args()
+
+filename = os.path.abspath(args.filename)
+
+assert os.path.exists(filename)
+
+for user in os.listdir("/home"):
+    dest = "/home/"+user+"/"+os.path.basename(filename)
+    if os.path.islink(dest):
+        run("rm "+dest)
+    if os.path.exists(dest):
+        print("File already exists:",dest)
+    else:
+        print("Linking from",dest)
+        run("ln -s "+filename+" "+dest)
+

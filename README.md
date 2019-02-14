@@ -26,3 +26,20 @@ Another thing to remember: If for some reason someone has logged into RStudio in
 
 https://.../rstudio/auth-sign-in
 
+
+## R workshop Docker image
+
+Directory "docker" contains files for creating a Docker image for running an R workshop.
+
+The built image is currently available on Docker Hub as [paulfharrison/rworkshop](https://cloud.docker.com/u/paulfharrison/repository/docker/paulfharrison/rworkshop).
+
+Set environment variable PASSWORD to a suitable password. Expose port 8787. Connect to http://[IP-address]:8787 with a web browser, and log in as "rstudio" with the password you specified. You will then see a list of freshly generated guest accounts available as CSV and HTML files.
+
+Within the instance, you can symlink a file or directory into all user's home directory with `sudo ./share <filename>`. For example you could do:
+
+```
+git clone https://github.com/MonashDataFluency/r-intro-2.git
+sudo ./share r-intro-2/r-intro-2-files
+```
+
+R packages installed as the `rstudio` user are available to all users.

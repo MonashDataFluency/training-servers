@@ -1,0 +1,6 @@
+#!/usr/bin/with-contenv bash
+
+echo "Creating guest users"
+cd /home/rstudio
+./create-users &
+
